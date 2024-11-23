@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './Components/Navbar/Navbar'
-import Home from './Pages/Home/Home'
-import Favorite from './Pages/Favorite/Favorite'
-import Error from './Pages/Error/Error'
-import Footer from './Components/Footer/Footer'
+import Loader from './Components/Loader/Loader'
+
+const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
+const Home = lazy(() => import('./Pages/Home/Home'))
+const Favorite = lazy(() => import('./Pages/Favorite/Favorite'))
+const Error = lazy(() => import('./Pages/Error/Error'))
+const Footer = lazy(() => import('./Components/Footer/Footer'))
 
 const App = () => {
   return (
-    <div>
+    <Suspense fallback={<Loader />}>
       <Navbar />
       <Router>
         <Routes>
@@ -18,7 +20,7 @@ const App = () => {
         </Routes>
       </Router>
       <Footer />
-    </div>
+    </Suspense>
   )
 }
 
