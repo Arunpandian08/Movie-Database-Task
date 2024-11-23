@@ -12,12 +12,26 @@ const Footer = lazy(() => import('./Components/Footer/Footer'))
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [showPopover, setShowPopover] = useState(false);
+  const[searchTerm, setSearchTerm] = useState('')
+
+    // const togglePopover = () => {
+    //     setShowPopover(!showPopover);
+    // };
+
+
   return (
     <Suspense fallback={<Loader />}>
-      <Navbar isAuthenticated={isAuthenticated} />
+      <Navbar
+       isAuthenticated={isAuthenticated} 
+       setSearchTerm={setSearchTerm}
+      //  showPopover={showPopover}
+      //  setShowPopover={setShowPopover}
+      //  togglePopover={togglePopover}
+       />
       <main>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home searchTerm={searchTerm} />} />
           <Route path='/favorite' element={<Favorite />} />
           <Route path='/signin' element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
           <Route path='/signup' element={<SignUp setIsAuthenticated={setIsAuthenticated} />} />

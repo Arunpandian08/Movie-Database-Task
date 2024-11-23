@@ -1,0 +1,23 @@
+.loader {
+    width: 100%;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-loader2 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #E4E4ED;
+    border-right-color: #f14747e0;
+    animation: s2 1s infinite linear;
+}
+
+@keyframes s2 {
+    to {
+        transform: rotate(1turn)
+    }
+}

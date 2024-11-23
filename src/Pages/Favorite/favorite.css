@@ -1,0 +1,22 @@
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #ffffff13 !important;
+    backdrop-filter: blur(10px);
+}
+
+.card img {
+    height: auto;
+    border-radius: 5px;
+    object-fit: contain;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover img {
+    transform: scale(1.04) !important;
+    cursor: pointer;
+}

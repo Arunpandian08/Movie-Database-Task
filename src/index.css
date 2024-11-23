@@ -21,7 +21,15 @@ body {
 
 main {
   margin-top: 5rem;
-  min-height:100svh;
+  min-height: 100svh;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width:992px) {
