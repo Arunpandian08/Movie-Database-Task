@@ -12,13 +12,15 @@ const App = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Navbar />
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/favorite' element={<Favorite />} />
-          <Route path='*' element={<Error />} />
-        </Routes>
-      </Router>
+      <main>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/favorite' element={<Favorite />} />
+            <Route path='*' element={<Error />} />
+          </Routes>
+        </Router>
+      </main>
       <Footer />
     </Suspense>
   )
