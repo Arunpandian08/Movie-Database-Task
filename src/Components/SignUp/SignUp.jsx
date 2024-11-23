@@ -1,7 +1,7 @@
 import React from 'react'
 import './signUp.css'
 
-const SignUp = () => {
+const SignUp = ({setIsAuthenticated}) => {
   return (
     <div>SignUp</div>
   )
