@@ -55,7 +55,7 @@ const SignIn = ({ setIsAuthenticated }) => {
         <p className="p" >
           Don't have an account?
           <span className="span"
-            onClick={() => navigate('/admin/sign-up')}
+            onClick={() => navigate('/signup')}
           >Sign Up</span>
         </p>
 

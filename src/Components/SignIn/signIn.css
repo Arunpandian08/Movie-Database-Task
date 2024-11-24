@@ -50,7 +50,7 @@
 }
 
 .flex-column>label {
-    color: #151717;
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -68,10 +68,6 @@
 .inputForm svg {
     fill: #fff !important;
 
-}
-
-label {
-    color: #fff !important;
 }
 
 .input {
