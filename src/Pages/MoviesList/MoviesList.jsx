@@ -10,6 +10,8 @@ const MoviesList = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const moviesPerPage = 8;
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -32,7 +34,17 @@ const MoviesList = () => {
         }
     };
 
-    if(isLoading) return <HomePageLoader />
+    const indexOfLastMovie = currentPage * moviesPerPage;
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie)
+
+    const totalPages = Math.ceil(movies.length / moviesPerPage)
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
+
+    if (isLoading) return <HomePageLoader />
     return (
         <div className="container">
             <form onSubmit={handleSearch} className="d-flex justify-content-center" role="search">
@@ -52,7 +64,7 @@ const MoviesList = () => {
                 </div>
             }
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-3">
-                {movies.map((movie) => (
+                {currentMovies?.map((movie) => (
                     <div className="col-md-3" key={movie.imdbID}>
                         <div className="card h-100 bg-black border-white">
                             <img
@@ -69,6 +81,47 @@ const MoviesList = () => {
                     </div>
                 ))}
             </div>
+            {totalPages > 1 && (
+                <div className="d-flex justify-content-center mt-3"> 
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                            <li className="page-item">
+                                <a
+                                    className="page-link bg-black text-white"
+                                    href="#"
+                                    aria-label="Previous"
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                >
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {Array.from({ length: totalPages }, (_, index) => (
+                                <li className="page-item" key={index + 1}>
+                                    <a
+                                        className="page-link bg-black text-white"
+                                        href="#"
+                                        onClick={() => handlePageChange(index + 1)}
+                                    >
+                                        {index + 1}
+                                    </a>
+                                </li>
+                            ))}
+                            <li className="page-item">
+                                <a
+                                    className="page-link bg-black text-white"
+                                    href="#"
+                                    aria-label="Next"
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            )}
         </div>
     );
 };
