@@ -1,9 +1,12 @@
-import React, { lazy, Suspense, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Loader from './Components/Loader/Loader'
+import MovieDetails from './Pages/MovieDetails/MovieDetails'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './Components/Firebase/firebase'
 
 const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
-const Home = lazy(() => import('./Pages/Home/Home'))
+const MoviesList = lazy(() => import('./Pages/MoviesList/MoviesList'))
 const Favorite = lazy(() => import('./Pages/Favorite/Favorite'))
 const SignIn = lazy(() => import('./Components/SignIn/SignIn'))
 const SignUp = lazy(() => import('./Components/SignUp/SignUp'))
@@ -12,17 +15,29 @@ const Footer = lazy(() => import('./Components/Footer/Footer'))
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const[searchTerm, setSearchTerm] = useState('')
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true); 
+      } else {
+        setIsAuthenticated(false); 
+      }
+    });
+
+    return () => unsubscribe();
+  }, [setIsAuthenticated]);
 
   return (
     <Suspense fallback={<Loader />}>
       <Navbar
        isAuthenticated={isAuthenticated} 
-       setSearchTerm={setSearchTerm}
+       setIsAuthenticated={setIsAuthenticated}
        />
       <main>
         <Routes>
-          <Route path='/' element={<Home searchTerm={searchTerm} />} />
+          <Route path='/' element={<MoviesList />} />
+          <Route path='/movies/:id' element={<MovieDetails />} />
           <Route path='/favorite' element={<Favorite />} />
           <Route path='/signin' element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
           <Route path='/signup' element={<SignUp setIsAuthenticated={setIsAuthenticated} />} />

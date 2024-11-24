@@ -31,9 +31,3 @@ i:hover {
 ::-webkit-scrollbar {
   display: none;
 }
-
-@media (max-width:992px) {
-  main {
-    margin-top: 10.5rem;
-  }
-}
