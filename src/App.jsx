@@ -36,7 +36,7 @@ const App = () => {
        />
       <main>
         <Routes>
-          <Route path='/' element={<MoviesList />} />
+          <Route path='/' element={<MoviesList isAuthenticated={isAuthenticated} />} />
           <Route path='/movies/:id' element={<MovieDetails />} />
           <Route path='/favorite' element={<Favorite />} />
           <Route path='/signin' element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './moviesList.css';
 import HomePageLoader from '../../Components/HomePageLoader/HomePageLoader';
 
-const MoviesList = () => {
+const MoviesList = ({ isAuthenticated }) => {
     const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('');
     const [movies, setMovies] = useState([]);
@@ -15,6 +15,9 @@ const MoviesList = () => {
 
     const handleSearch = async (e) => {
         e.preventDefault();
+        if (!isAuthenticated) {
+            navigate('/signup')
+        }
         if (!searchTerm) return;
         setIsLoading(true)
         try {
@@ -82,7 +85,7 @@ const MoviesList = () => {
                 ))}
             </div>
             {totalPages > 1 && (
-                <div className="d-flex justify-content-center mt-3"> 
+                <div className="d-flex justify-content-center mt-3">
                     <nav aria-label="Page navigation example">
                         <ul className="pagination">
                             <li className="page-item">
