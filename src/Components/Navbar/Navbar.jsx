@@ -43,9 +43,8 @@ const Navbar = ({ isAuthenticated,setSearchTerm }) => {
                         <div className="popover-container" onClick={togglePopover}>
                             {isAuthenticated ? (
                                 <div>
-                                    <a href="/" className="popover-item">Profile</a>
-                                    <hr />
-                                    <span className="popover-item">Logout</span>
+                                    <a href="/" className="popover-item border-bottom"><i class="bi bi-person"></i> Profile</a>
+                                    <span className="popover-item"><i class="bi bi-power"></i> Logout</span>
                                 </div>
                             ) : (
                                 <div>
