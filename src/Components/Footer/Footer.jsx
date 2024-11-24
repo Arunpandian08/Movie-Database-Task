@@ -5,9 +5,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
   return (
     <footer className='footer'>
-       <p className="legal">
-                Copyright &copy; {currentYear} All rights reserved | This template is made with ReactJS by <span className='name'>Arunpandian</span>
-            </p>
+      <p className="legal">
+        Copyright &copy; {currentYear} All rights reserved | This template is made with ReactJS by <span className='name'>Arunpandian</span>
+      </p>
     </footer>
   )
 }

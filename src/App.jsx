@@ -12,22 +12,13 @@ const Footer = lazy(() => import('./Components/Footer/Footer'))
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [showPopover, setShowPopover] = useState(false);
   const[searchTerm, setSearchTerm] = useState('')
-
-    // const togglePopover = () => {
-    //     setShowPopover(!showPopover);
-    // };
-
 
   return (
     <Suspense fallback={<Loader />}>
       <Navbar
        isAuthenticated={isAuthenticated} 
        setSearchTerm={setSearchTerm}
-      //  showPopover={showPopover}
-      //  setShowPopover={setShowPopover}
-      //  togglePopover={togglePopover}
        />
       <main>
         <Routes>

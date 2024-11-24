@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import './home.css'
 import axios from 'axios';
 import HomePageLoader from '../../Components/HomePageLoader/HomePageLoader';
@@ -48,8 +48,91 @@ const Home = ({ searchTerm }) => {
     }
   }
 
-  const handleArrowClick = () => {
+  const handleArrowClick = useCallback(() => {
     window.scrollTo(0, 0);
+  });
+
+  const renderPagination = () => {
+    const pages = [];
+    const maxPagesToShow = 6;
+
+    if (totalPages <= maxPagesToShow) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (pageNumber <= 4) {
+        pages.push(1, 2, 3, 4, "...", totalPages);
+      } else if (pageNumber > totalPages - 4) {
+        pages.push(1, "...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+      } else {
+        pages.push(
+          1,
+          "...",
+          pageNumber - 1,
+          pageNumber,
+          pageNumber + 1,
+          "...",
+          totalPages
+        );
+      }
+    } return (
+      <nav aria-label="Page navigation bg-black example" className="pagination-container">
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${pageNumber === 1 ? "disabled" : ""}`}>
+            <button
+              className="page-link bg-black"
+              aria-label="Previous"
+              onClick={() => {
+                if (pageNumber > 1) {
+                  setPageNumber(pageNumber - 1)
+                  handleArrowClick();
+                }
+              }}
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+          {pages.map((page, index) => (
+            <li
+              key={index}
+              className={`page-item ${page === pageNumber ? "active" : ""}  bg-white`}
+            >
+              {typeof page === "number" ? (
+                <button
+                  className="page-link  bg-black"
+                  onClick={() => {
+                    setPageNumber(page);
+                    handleArrowClick();
+                  }}
+                >
+                  {page}
+                </button>
+              ) : (
+                <span className="page-link  bg-black">...</span>
+              )}
+            </li>
+          ))}
+          <li
+            className={`page-item ${pageNumber === totalPages ? "disabled" : ""
+              }`}
+          >
+            <button
+              className="page-link  bg-black"
+              aria-label="Next"
+              onClick={() => {
+                if (pageNumber < totalPages) {
+                  setPageNumber(pageNumber + 1)
+                  handleArrowClick()
+                }
+              }}
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    );
   };
 
   return (
@@ -70,7 +153,7 @@ const Home = ({ searchTerm }) => {
                 onClick={() => {
                   if (pageNumber > 1) {
                     setPageNumber(prev => prev - 1);
-                    handleArrowClick(); 
+                    handleArrowClick();
                   }
                 }}
               ></i>
@@ -79,7 +162,7 @@ const Home = ({ searchTerm }) => {
                 onClick={() => {
                   if (pageNumber < totalPages) {
                     setPageNumber(prev => prev + 1);
-                    handleArrowClick(); 
+                    handleArrowClick();
                   }
                 }}
               ></i>
@@ -87,6 +170,10 @@ const Home = ({ searchTerm }) => {
           </div>
           {/* movies poster with data */}
           <MovieCards moviesData={moviesData} />
+          {/* numbered pagination */}
+          <div className="mt-2">
+            {renderPagination()}
+          </div>
         </>
       )}
     </section>
