@@ -40,7 +40,7 @@ const Navbar = ({ isAuthenticated,setSearchTerm }) => {
                         </li>
                     </ul>
                     {showPopover && (
-                        <div className="popover-container">
+                        <div className="popover-container" onClick={togglePopover}>
                             {isAuthenticated ? (
                                 <div>
                                     <a href="/" className="popover-item">Profile</a>
