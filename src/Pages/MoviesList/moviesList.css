@@ -21,3 +21,16 @@
     transform: scale(1.04) !important;
     cursor: pointer;
 }
+
+.d-flex .form-control {
+    background-color: #000;
+    color: #fff;
+}
+
+.d-flex .form-control:focus {
+    box-shadow: 0 0 5px #fff;
+}
+
+.d-flex .form-control::placeholder {
+    color: #ffffff93;
+}
