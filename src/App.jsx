@@ -1,12 +1,12 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Loader from './Components/Loader/Loader'
-import MovieDetails from './Pages/MovieDetails/MovieDetails'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './Components/Firebase/firebase'
 
 const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
 const MoviesList = lazy(() => import('./Pages/MoviesList/MoviesList'))
+const MovieDetails = lazy(()=>import('./Pages/MovieDetails/MovieDetails'))
 const Favorite = lazy(() => import('./Pages/Favorite/Favorite'))
 const SignIn = lazy(() => import('./Components/SignIn/SignIn'))
 const SignUp = lazy(() => import('./Components/SignUp/SignUp'))

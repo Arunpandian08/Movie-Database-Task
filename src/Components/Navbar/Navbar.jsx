@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './navbar.css'
 import brandLogo from '../../assets/brandLogo.png'
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../Firebase/firebase';
 
@@ -46,15 +46,15 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                 </div>
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li className="nav-item user-icon ms-5" onClick={togglePopover}>
-                        {isAuthenticated ? <i className="bi bi-person-circle fs-2"></i> : <i class="bi bi-person-add fs-2"></i>}
+                        {isAuthenticated ? <i className="bi bi-person-circle fs-2"></i> : <i className="bi bi-person-add fs-2"></i>}
                     </li>
                 </ul>
                 {showPopover && (
                     <div className="popover-container" onClick={togglePopover}>
                         {isAuthenticated ? (
                             <div>
-                                <a href="/" className="popover-item border-bottom"><i class="bi bi-person"></i> Profile</a>
-                                <a href='/' className="popover-item" onClick={handleLogout}><i class="bi bi-power"></i> Logout</a>
+                                <a href="/" className="popover-item border-bottom"><i className="bi bi-person"></i> Profile</a>
+                                <a href='/' className="popover-item" onClick={handleLogout}><i className="bi bi-power"></i> Logout</a>
                             </div>
                         ) : (
                             <div>

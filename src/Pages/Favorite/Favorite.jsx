@@ -55,7 +55,7 @@ const Favorite = () => {
           </div>
         </>
       ) : (
-        <div className="d-flex justify-content-center align-items-center text-white">
+        <div className="d-flex justify-content-center align-items-center text-white" style={{height:'80svh'}}>
           Add Favorite <i className="bi bi-bookmark"></i>
         </div>
       )}

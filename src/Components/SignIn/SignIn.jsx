@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase/firebase';
+import SigninWithGoogle from '../SigninWithGoogle/SigninWithGoogle';
 
 const SignIn = ({ setIsAuthenticated }) => {
   const navigate = useNavigate()
@@ -50,6 +51,7 @@ const SignIn = ({ setIsAuthenticated }) => {
             type="email"
             className="input"
             placeholder="Enter your Email"
+            autoComplete='true'
             {...register('email', {
               required: 'Email is Required',
               pattern: {
@@ -76,6 +78,7 @@ const SignIn = ({ setIsAuthenticated }) => {
             type="password"
             className="input"
             placeholder="Enter your Password"
+            autoComplete='true'
             {...register('password', {
               required: 'Password is Required',
               minLength: { value: 8, message: 'Password must be at least 6 characters' },
@@ -87,13 +90,7 @@ const SignIn = ({ setIsAuthenticated }) => {
           />
         </div>
         {errors.password && <p className='text-danger mb-0'>{errors.password.message}</p>}
-        <div className="flex-row">
-          <div>
-            <input type="checkbox" />
-            <label>Remember me</label>
-          </div>
-          <span className="span">Forgot password?</span>
-        </div>
+        
 
         {/* Sign In Button */}
         <button className="button-submit" type='submit'>Sign In</button>
@@ -106,30 +103,7 @@ const SignIn = ({ setIsAuthenticated }) => {
 
         {/* Or With */}
         <p className="p-line text-center">- Or With -</p>
-        <div className="flex-row">
-          {/* Google Button */}
-          <button className="s-btn google">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                style={{ fill: '#FBBB00' }}
-                d="M113.47 309.408L95.648 375.94l-65.139 1.378C11.042 341.211 0 299.9 0 256c0-42.451 10.324-82.483 28.624-117.732h.014l57.992 10.632 25.404 57.644c-5.317 15.501-8.215 32.141-8.215 49.456C103.821 274.792 107.225 292.797 113.47 309.408Z" />
-              <path
-                style={{ fill: '#518EF8' }}
-                d="M507.527 208.176C510.467 223.662 512 239.655 512 256c0 18.328-1.927 36.206-5.598 53.451-12.462 58.683-45.025 109.925-90.134 146.187l-.014-.014-73.044-3.727-10.338-64.535c29.932-17.554 53.324-45.025 65.646-77.911h-136.89V208.176h138.887l117.37-.176Z" />
-              <path style={{ fill: '#28B446' }} d="M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512
-	c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.278,98.771,142.53,98.771
-	c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z" />
-              <path style={{ fill: '#F14336' }} d="M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012
-	c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0
-	C318.115,0,375.068,22.126,419.404,58.936z" />
-            </svg>
-            Google
-          </button>
-        </div>
+        <SigninWithGoogle setIsAuthenticated={setIsAuthenticated} />
       </form>
       <div className={`toast ${showToast ? 'show' : ''}`} style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 1050 }}>
         <div className={`toast-header ${toastType === 'success' ? 'bg-success text-white' : 'bg-danger text-white'}`}>

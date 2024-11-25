@@ -39,6 +39,19 @@ const MovieDetails = () => {
     }
   };
 
+  const renderStars = (rating) => {
+    let stars = [];
+    let filledStars = Math.round(rating / 2);
+
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <i key={i} className={`bi bi-star${i <= filledStars ? '-fill' : ''} ps-1`} style={{ color: 'gold' }}></i>
+      );
+    }
+    return stars;
+  };
+
+
   if (loading) return  <HomePageLoader />
   if (error) return <div classNameName='text-white'>Error: {error.message}</div>;
   if (!movie) return <div>No movie found</div>;
@@ -55,6 +68,7 @@ const MovieDetails = () => {
             <div className="card-body">
               <p className="card-text"><strong>Release Year:</strong> {movie.Year}</p>
               <p className="card-text"><strong>Runtime:</strong> {movie.Runtime}</p>
+              <p className='rating'>Ratings: {renderStars(movie.imdbRating)}</p>
               <p className="card-text"><strong>Language:</strong> {movie.Language}</p>
               <p className="card-text"><strong>Plot:</strong> {movie.Plot}</p>
               <p className="card-text"><strong>Genres:</strong> {movie.Genre}</p>
